@@ -1,0 +1,21 @@
+# get node images with tag  <image_name> : <tag>
+FROM node:10
+
+# create app directory inside image that will be created
+WORKDIR /usr/src/app
+
+# node_nodules folder consist of app dependencies. 
+# It has to be installed according to package and package-lock files
+COPY package.*json ./
+
+# Install app dependencies 
+RUN npm install
+
+# app source
+COPY . .
+
+# app's port
+EXPOSE 8080
+
+# application run command is specified with CMD
+CMD [ "node","server.js"]
